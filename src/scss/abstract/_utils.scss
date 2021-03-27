@@ -1,0 +1,173 @@
+/*
+// Utilities
+// ------------------------------------------------ */
+
+/*==== General ====*/
+.pull-right {
+  float: right;
+}
+.pull-left {
+  float: left;
+}
+.pull-none {
+  float: none;
+}
+
+.clearfix {
+  &:before,
+  &:after {
+    content: ' ';
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// erase and replace by 'between-($breakpoint)' and 'center-($breakpoint)'
+.space-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+/*==== Postitioning ====*/
+.center {
+  margin: auto auto;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+/*==== Toggling content ====*/
+.invisible {
+  visibility: hidden;
+}
+.no-flow {
+  position: fixed;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+.hide {
+  display: none;
+}
+.show {
+  display: block !important;
+}
+.disabled {
+  background: color(grey, 'lighter-1');
+}
+.no-flow-submit {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+.no-flow-x {
+  overflow-x: hidden;
+}
+.xflow {
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+/*==== Positioning ====*/
+.affix {
+  position: fixed;
+}
+.pr {
+  position: relative;
+}
+.abs {
+  position: absolute;
+}
+.margin-center {
+  margin: auto auto;
+}
+
+/*==== Spacing ====*/
+.no-padding {
+  padding: 0;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.no-side-margins {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/*==== Images ====*/
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+
+.img-responsive-v2 {
+  object-fit: cover;
+  object-position: center;
+  height: 100%;
+  width: 100%;
+}
+
+/*==== Text ====*/
+.capitalize {
+  text-transform: capitalize;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.blue-link {
+  color: color(blue, 'default');
+}
+
+/*==== Cursor ==== */
+.pointer {
+  cursor: pointer;
+}
+
+/*==== Backgrounds ====*/
+.bg-black {
+  background: #000;
+}
+
+/*==== animations ====*/
+.rotate-down {
+  display: inline-block;
+  transform: rotate(0);
+  transition: 0.09s all ease-in;
+
+  &.active {
+    transform: rotate(90deg);
+  }
+}
+
+
+.flex-col{
+  flex-direction: column;
+}
+
+.align-center{
+  align-items: center;
+}
+
+.rupee::before{
+  content: "\20B9";
+  margin-right: .1rem;
+}

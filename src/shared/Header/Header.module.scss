@@ -1,0 +1,112 @@
+@import "../../index.scss";
+// $logo: url("../../../images/logo.png") no-repeat;
+
+.header {
+  background-color: map-get($white, default);
+  height: 75px;
+  box-shadow: 0 7px 20px 5px rgba(0, 0, 0, 0.12);
+  padding: 24px 48px 24px 48px;
+  box-sizing: border-box;
+  position: sticky;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  // width: calc(100vw - 10px);
+
+  @include for-size(tablet-landscape-up) {
+    padding: 18px 30px 18px 30px;
+  }
+
+  .logo {
+    flex: 1 1 0;
+    // background: $logo;
+    height: 32px;
+    background-size: contain;
+    width: 100px;
+  }
+
+  .searchField{
+    // flex: 1 1 0;
+    width: 340px;
+    >div{
+      width: inherit;
+    }
+  }
+    
+  .userInfo {
+    font-size: 0.9375rem;
+    font-weight: $font-regular;
+
+    .avatar {
+      height: 45px;
+      width: 45px;
+      border-radius: 50%;
+      margin-left: 1.25rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &.parentAvatar {
+        background-color: #ffac44;
+        margin: 0;
+        text-transform: uppercase;
+        font-size: 1.75rem;
+        font-weight: $font-bold;
+        color: map-get($white, default);
+      }
+    }
+  }
+}
+
+
+
+.headerIcons {
+  margin-left: 9px;
+}
+
+// .headerLoggedInText {
+//   font-size: 13px;
+//   font-style: italic;
+//   color: #bababa;
+// }
+
+// .menu {
+//   font-size: 1rem;
+//   height: 75px;
+
+//   .menuItem {
+//     color: #293043;
+//     margin: 0 1rem;
+//     padding: 0 1rem;
+//     text-decoration: none;
+//     height: 72px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     position: relative;
+
+//     &:hover {
+//       color: #ffac44;
+//     }
+
+//     &.active {
+//       // color: map-get($map: shades, black);
+//       font-weight: $font-medium;
+//       cursor: default;
+
+//       &:before {
+//         content: "";
+//         height: 8px;
+//         width: 100%;
+//         border-radius: 8px;
+//         background-color: #ffac44 ;
+//         position: absolute;
+//         bottom: 0;
+//       }
+//     }
+//   }
+// }

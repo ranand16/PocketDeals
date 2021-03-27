@@ -1,0 +1,58 @@
+.registerContainer{
+    z-index: 1000 !important;
+    .signinContainer{
+        width: 40%;
+        margin: auto 0px auto auto;
+        height: 100%;
+        background: aqua;
+        overflow-y: scroll;
+        background: #fff;
+        transition: all .6s ease-out;
+        padding-top: 30px;
+        padding-left: 40px;
+        .crossIconContainer{
+            text-align: left;
+            .crossIcon{
+                color: #535665;
+                cursor: pointer;
+                font-weight: 300;
+                line-height: 1;
+                &::before{
+                    content: "\00d7";
+                    font-size: 40px;
+                }
+            }
+        }
+        .registerTextContainer{
+            text-align: left;
+            margin: 30px 0px;
+            .mainText{
+                font-size: 30px;
+                font-weight: 600;
+            }
+            .subText{
+                margin-top: 20px;
+                .subTextMain{
+                    font-weight: 500;
+                    cursor: pointer;
+                    color: #fc8019;
+                    &::after{
+                        content: "";
+                        position: absolute;
+                        bottom: -22px;
+                        left: 0;
+                        width: 30px;
+                        border: 3px solid #000;
+                    }
+                }
+            }
+        }
+        .signin{
+            padding-right: 233px;
+
+            .siginForm{
+
+            }
+        }
+    }
+}

@@ -1,0 +1,1 @@
+export { CarouselCustom } from "./CarouselCustom";
