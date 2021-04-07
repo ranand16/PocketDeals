@@ -6,8 +6,10 @@ import {
 } from "../Utils/actions";
 import { 
     AUTHSTATE, 
+    DOWNLOADPROFILE, 
     SIGNIN, 
-    SIGNUP
+    SIGNUP,
+    UPDATEPROFILE
 } from "./constants";
 
 export const setAuthStateRequest = createAction(REQUEST(AUTHSTATE))
@@ -20,3 +22,11 @@ export const signinFailure = createAction(FAILURE(SIGNIN))
 export const signupRequest = createAction(REQUEST(SIGNUP))
 export const signupSuccess = createAction(SUCCESS(SIGNUP))
 export const signupFailure = createAction(FAILURE(SIGNUP))
+
+export const updateProfileRequest = createAction(REQUEST(UPDATEPROFILE))
+export const updateProfileSuccess = createAction(SUCCESS(UPDATEPROFILE))
+export const updateProfileFailure = createAction(FAILURE(UPDATEPROFILE))
+
+export const profileDownloadRequest = createAction(REQUEST(DOWNLOADPROFILE))
+export const profileDownloadSuccess = createAction(SUCCESS(DOWNLOADPROFILE))
+export const profileDownloadFailure = createAction(FAILURE(DOWNLOADPROFILE))

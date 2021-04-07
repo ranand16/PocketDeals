@@ -38,7 +38,7 @@ export const PrivateRouteComponent = ({
   //   );
   // };
 
-  const renderRedirect = (props: any) => <Component {...props} />
+  const renderRedirect = (props: any) => { return <Component {...props} /> }
 
   if (!Component) {
     throw new Error(

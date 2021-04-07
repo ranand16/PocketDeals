@@ -8,46 +8,22 @@ const LoadableConfig = {
   };
   
 export const ROUTES = [
-    // {
-    //   key: "Product",
-    //   routeProps: {
-    //     path: "/product",
-    //     component: Lodable({
-    //       loader: () =>
-    //         import("../components/Product"),
-    //       loading: RouteLoader,
-    //       ...LoadableConfig,
-    //     }),
-    //   },
-    // },
-    // {
-    //   key: "Product Details",
-    //   routeProps: {
-    //     path: "/productDet",
-    //     component: Lodable({
-    //       loader: () =>
-    //         import("../components/Product"),
-    //       loading: RouteLoader,
-    //       ...LoadableConfig,
-    //     }),
-    //   },
-    // },
-    // {
-    //   key: "Register",
-    //   routeProps: {
-    //     path: "/",
-    //     component: Lodable({
-    //       loader: () =>
-    //         import("../shared/Register"),
-    //       loading: RouteLoader,
-    //       ...LoadableConfig,
-    //     }),
-    //   }
-    // },
+    {
+      key: "Home",
+      routeProps: {
+        path: "/home",
+        component: Lodable({
+          loader: () =>
+            import("../modules/Home"),
+          loading: RouteLoader,
+          ...LoadableConfig,
+        }),
+      }
+    },
     {
       key: "Products",
       routeProps: {
-        path: "/",
+        path: "/products",
         component: Lodable({
           loader: () =>
             import("../modules/Products"),
@@ -57,19 +33,19 @@ export const ROUTES = [
       }
     },
     {
-      key: "Cart",
+      key: "cart",
       routeProps: {
         path: "/cart",
         component: Lodable({
           loader: () =>
-            import("../modules/Cart"),
+            import("../modules/Checkout"),
           loading: RouteLoader,
           ...LoadableConfig,
         }),
       }
     },
     {
-      key: "Todos",
+      key: "todos",
       routeProps: {
         path: "/todos",
         component: Lodable({
@@ -82,57 +58,3 @@ export const ROUTES = [
     }
 ]
 
-
-// {
-//     key: "settings",
-//     restrictedRoute: true,
-//     routeProps: {
-//       path: "/settings",
-//       component: Lodable({
-//         loader: () =>
-//           import("../modules/Profile"),
-//         loading: UableRouteLoader,
-//         ...LoadableConfig,
-//       }),
-//       hasAnyAuthorities: [AUTHORITIES.PARENT, AUTHORITIES.STUDENT],
-//     },
-//   }
-    // {
-    //   key: "notFound",
-    //   restrictedRoute: false,
-    //   routeProps: {
-    //     path: "/page-not-found",
-    //     component: Lodable({
-    //       loader: () =>
-    //         import("../shared/Components/PageNotFound"),
-    //       loading: UableRouteLoader,
-    //       ...LoadableConfig,
-    //     }),
-    //   },
-    // },
-    // {
-    //   key: "maintenance",
-    //   restrictedRoute: false,
-    //   routeProps: {
-    //     path: "/maintenance",
-    //     component: Lodable({
-    //       loader: () =>
-    //         import("../shared/Components/MaintenancePage"),
-    //       loading: UableRouteLoader,
-    //       ...LoadableConfig,
-    //     }),
-    //   },
-    // },
-    // {
-    //   key: "signin",
-    //   restrictedRoute: false,
-    //   routeProps: {
-    //     path: "/signin",
-    //     component: Lodable({
-    //       loader: () =>
-    //         import("../modules/Authentication"),
-    //       loading: UableRouteLoader,
-    //       ...LoadableConfig,
-    //     }),
-    //   },
-    // },

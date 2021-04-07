@@ -1,0 +1,85 @@
+.cart{
+    width: 298px;
+    height: calc(100vh - 150px);
+    position: sticky;
+    padding: 10px 0px;
+    top: 75px;
+    background-color: #e9ecee;
+    box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.06);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    
+    .cartItems{
+        padding: 10px 20px 10px 20px;
+        text-align: left;
+        
+        .cartItemsText{
+            font-size: 32px;
+            font-weight: 600;
+            padding-top: 18px;
+        }
+
+        .cartItemsTotal{
+            font-weight: 600;
+            font-size: 13px;
+            color: #686b78;
+            text-transform: uppercase;
+            padding-top: 10px;
+        }
+
+        .cartItemsList{
+            padding: 20px 0px 0px 0px;
+
+            .cartItem{
+                padding-bottom: 10px;
+            }
+
+            .minus{
+                background-color: #e96125;
+                padding: 8px 12px;
+                border-top-left-radius: 3px;
+                border-bottom-left-radius: 3px;
+                border-left: .1px solid #e96125;
+                line-height: 14px;
+                color: #FFF;
+            }
+            .add{
+                background-color: #e96125;
+                padding: 8px 12px;
+                border-top-right-radius: 3px;
+                border-bottom-right-radius: 3px;
+                border-right: .1px solid #e96125;
+                line-height: 14px;
+                color: #FFF;
+            }
+        }
+
+        .cartItemsCheckout{
+            .cartSum{
+                color: #3d4152;
+                font-size: 20px;
+                font-weight: 600;
+            }
+
+            .checkoutButton{
+                padding-top: 30px;
+                button{
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .cartEmpty{
+        width: inherit;
+        .cartEmptyText{
+            color: #7e808c;
+            letter-spacing: -0.3px;
+            font-size: 32px;
+            font-weight: bold;
+        }
+        img{
+            width: inherit;
+        }
+    }
+}

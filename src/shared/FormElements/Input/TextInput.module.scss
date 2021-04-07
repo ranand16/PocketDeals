@@ -1,0 +1,43 @@
+.textInputContainer{
+    border: 1px solid #d4d5d9;
+    padding: 0;
+    display: block;
+    position: relative;
+    transform: translateZ(0);
+    text-align: left;
+    label{
+        font-size: 12px;
+        font-weight: 500;
+        color: #7e808c;
+        position: absolute;
+        left: 0;
+        bottom: 38px;
+        padding-left: 20px;
+        line-height: 20px;
+        cursor: text;
+        transition: .2s ease;
+        width: 100%;
+        will-change: transform,color,font-size;
+        pointer-events: none;
+    }
+
+    input{
+        background-color: transparent;
+        line-height: normal;
+        border: none;
+        outline: none;
+        height: 70px;
+        width: 100%;
+        font-size: 17px;
+        margin: 0;
+        padding: 0 20px;
+        padding-top: 22px;
+        box-shadow: none;
+        box-sizing: border-box;
+        border-radius: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: 500;
+    }
+}

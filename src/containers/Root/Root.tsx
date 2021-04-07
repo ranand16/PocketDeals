@@ -9,9 +9,9 @@ interface IProps {
 
 const Root = ({ store }: IProps) => (
   <Provider store={store}>
-    <Router>
+    {/* <Router> */}
       <App />
-    </Router>
+    {/* </Router> */}
   </Provider>
 );
 

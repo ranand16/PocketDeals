@@ -4,10 +4,13 @@ import classnames from 'classnames';
 import styles from "./ProductsList.module.scss"
 import vegicon from "../../../../images/veg.png"
 import cartempty from "../../../../images/emptycart.png"
-import { Button } from '@material-ui/core';
+import { Button, responsiveFontSizes } from '@material-ui/core';
 import { Button as CustomButton } from "../../../../shared/FormElements/Button/Button"
 import { get } from "lodash"
 import { useHistory } from 'react-router';
+import axios, { AxiosRequestConfig } from 'axios';
+import { stringifyValue } from '../../../../shared/Utils/Stringify';
+import CartComp from '../../../Cart/components/CartComp/CartComp';
 
 interface Props extends DispatchProps, StateProps {}
 
@@ -22,6 +25,7 @@ const ProductsList: React.FC<Props> = ({
     const history = useHistory();
     const [visibleProducts, setvisibleProducts] = useState(10);
     useEffect(()=> {
+        if(list.length>0) return 
         fetchProductsRequestAction()
     }, [])
 
@@ -55,6 +59,74 @@ const ProductsList: React.FC<Props> = ({
     const onCheckout = useCallback(() => {
         history.push("/cart")
     },[history])
+
+    /**
+     * On payment button
+     */
+    const onPayment = useCallback(() => {
+
+    },[])
+
+    const payment = async () => {
+        console.log("Payment start")
+        try{
+            const amount = "100.00";
+            const phone_number = "+919111233100";
+            const email = "100.00";
+            const orderId = "order_id"+(new Date().getTime());
+            const params = {
+                amount,
+                phone_number,
+                email,
+                orderId
+            }   
+            const url = "http://localhost:8081/payment"
+            const req: AxiosRequestConfig = {
+                url: url,
+                params: params,
+                method: 'POST',
+                headers:{
+                    "Content-Type":"application/json",
+                    "Accept":"application/json"
+                }
+            }
+            const response:any = await axios(req);
+            const processParams = await response.data;
+            console.log(processParams)
+            const details = {
+                action: "https://securegw-stage.paytm.in/order/process",
+                params: processParams
+            }
+            console.log(details)
+            post(details);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+  
+    // const buildForm = ({ action, target, params }) => {
+    const buildForm = ({ action, params }) => {
+        const form = document.createElement('form')
+        form.setAttribute('method', 'post')
+        form.setAttribute('action', action)
+        // form.setAttribute('target', target)
+    
+        Object.keys(params).forEach(key => {
+            const input = document.createElement('input')
+            input.setAttribute('type', 'hidden')
+            input.setAttribute('name', key)
+            input.setAttribute('value', stringifyValue(params[key]))
+            form.appendChild(input)
+        })
+        return form
+    }
+    
+    const post = (details) => {
+        const form = buildForm(details)
+        document.body.appendChild(form)
+        form.submit()
+        form.remove()
+    }
 
     return <div className={classnames(styles.productListContainer)}>
         {listLoading}
@@ -129,75 +201,13 @@ const ProductsList: React.FC<Props> = ({
                     <Button color="primary">Load more products</Button>
                 </div>
             </div>
-            <div className={classnames(styles.cart)}>
-                {
-                    cart.length > 0 ?
-                    <div className={classnames("d-flex","flex-col",styles.cartItems)}>
-                        <div className={classnames(styles.cartItemsText)}>Cart</div>
-                        <div className={classnames(styles.cartItemsTotal)}>{[...cart].reduce((a, b) => a + (b["count"] || 0), 0)} items</div>
-                        <div className={classnames("d-flex", "flex-col",styles.cartItemsList)}>
-                            {
-                                cart.map((product, i)=>{
-                                    console.log(product)
-                                    return <div key={i} className={classnames("d-flex","space-between",styles.cartItem)}>
-                                        <div className={classnames(styles.productDetails)}>
-                                            <div className={classnames("bold",styles.productCompany)}>{get(product, "productDetails.brand", "")}</div>
-                                            <div className={classnames("semi-medium",styles.productName)}>
-                                                <img style={{ width: "16px" }} src={vegicon} /> {get(product, "productDetails.productname", "")}
-                                            </div>
-                                            <div className={classnames("light",styles.productPrice)}>
-                                                <span className={"rupee"}>{get(product, "productDetails.price", "")}</span>
-                                            </div>
-                                        </div>
-                                        <div className={classnames(styles.productQuantity)}>
-                                            <span 
-                                                className={classnames("pointer",styles.minus)}
-                                                data-key={product.id}
-                                                onClick={removeFromCart}
-                                            >
-                                                -
-                                            </span>
-                                            <span 
-                                                className={classnames(styles.countText)}
-                                            >
-                                                {product.count}
-                                            </span>
-                                            <span
-                                                className={classnames("pointer",styles.add)}
-                                                data-key={product.id}
-                                                onClick={addToCart}
-                                            >
-                                                +
-                                            </span>
-                                    </div>
-                                </div>   
-                                })
-                            }
-                        </div>
-                        <div className={classnames(styles.cartItemsCheckout)}>
-                            <div className={classnames("d-flex","space-between",styles.cartSum)}>
-                                <div>Subtotal</div>
-                                <div><span className={"rupee"}>{[...cart].reduce((a, b) => a + get(b,"count",0)*get(b,"productDetails.price",0), 0)}</span></div>
-                            </div>
-                            <div></div>
-                            <div className={classnames(styles.checkoutButton)}>
-                                <CustomButton
-                                    variant="primary"
-                                    type="submit"
-                                    text="CHECKOUT"
-                                    size={"sm"}
-                                    onClick={onCheckout}
-                                />
-                            </div>
-                        </div>
-                    </div>:
-                    <div className={classnames("d-flex","flex-col",styles.cartEmpty)}>
-                        <div className={classnames(styles.cartEmptyText)}>Cart Empty</div>
-                        <img src={cartempty} alt={"Empty cart"} />
-                    </div>
-
-                }
-            </div>
+            <CartComp 
+                cart={cart}
+                addProductToCartRequestAction={addProductToCartRequestAction}
+                removeProductToCartRequestAction={removeProductToCartRequestAction}
+                onCheckout={onCheckout}
+                onPayment={null}
+            />
         </div>
     </div>
 }

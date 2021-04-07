@@ -4,14 +4,16 @@ import { Button as CustomButton } from "../../../../shared/FormElements/Button/B
 import classnames from "classnames"
 import styles from "./CartComp.module.scss"
 import vegicon from "../../../../images/veg.png"
-import get from "lodash"
+import { get } from "lodash"
 
 interface Props extends DispatchProps, StateProps {}
 
 const CartComp: React.FunctionComponent<Props> = ({
     cart,
     addProductToCartRequestAction,
-    removeProductToCartRequestAction
+    removeProductToCartRequestAction,
+    onCheckout,
+    onPayment
 }: Props) => {
     /**
      * Add this product to cart
@@ -30,7 +32,6 @@ const CartComp: React.FunctionComponent<Props> = ({
         removeProductToCartRequestAction(productId)
     },[])
 
-
     return <>
         <div className={classnames(styles.cart)}>
                 {
@@ -40,8 +41,7 @@ const CartComp: React.FunctionComponent<Props> = ({
                         <div className={classnames(styles.cartItemsTotal)}>{[...cart].reduce((a, b) => a + (b["count"] || 0), 0)} items</div>
                         <div className={classnames("d-flex", "flex-col",styles.cartItemsList)}>
                             {
-                                cart.map((product, i)=>{
-                                    console.log(product)
+                                [...cart].map((product, i)=>{
                                     return <div key={i} className={classnames("d-flex","space-between",styles.cartItem)}>
                                         <div className={classnames(styles.productDetails)}>
                                             <div className={classnames("bold",styles.productCompany)}>{get(product, "productDetails.brand", "")}</div>
@@ -87,9 +87,9 @@ const CartComp: React.FunctionComponent<Props> = ({
                                 <CustomButton
                                     variant="primary"
                                     type="submit"
-                                    text="PAYMENT"
+                                    text={onCheckout?"CHECKOUT":"PAYMENT"}
                                     size={"sm"}
-                                    onClick={()=>{}}
+                                    onClick={onCheckout?onCheckout:onPayment}
                                 />
                             </div>
                         </div>

@@ -17,22 +17,25 @@ const AppNavigator: React.FC = () => {
 
 
   return (
+    <>
     <Switch>
-      <Redirect from="/:url*(/+)" to={pathname.slice(0, -1)} />
+      {/* <Redirect from="/:url*(/+)" to={pathname.slice(0, -1)} /> */}
       <Route path={ROUTES.map((route) => route.routeProps.path)}>
         <WithHeader>
           <Switch>
             {
-              ROUTES.map((route, i)=>
-                <PrivateRoute key={i} {...route.routeProps} /> 
-              )
+              ROUTES.map((route, i)=> {
+                console.log("route::  ", route)
+                return <PrivateRoute key={i} {...route.routeProps} /> 
+              })
             }
           </Switch>
         </WithHeader>
       </Route>
-      <Redirect exact from="/" to={defaultUrl()} />
+      {/* <Redirect exact from="/" to={defaultUrl()} /> */}
 
     </Switch>
+    </>
   );
 };
 

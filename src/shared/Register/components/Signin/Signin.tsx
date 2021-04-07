@@ -113,24 +113,28 @@ const Signin: React.FC<Props> = ({
                                 initialValues={{ 
                                     signupName: "",
                                     signupEmail: "",
-                                    signupPassword: ""
+                                    signupPassword: "",
+                                    signupphonenumber: ""
                                 }}
                                 onSubmit={(values) => {
                                     onSubmit({
                                         signupName: values.signupName,
                                         signupEmail: values.signupEmail,
-                                        signupPassword: values.signupPassword
+                                        signupPassword: values.signupPassword,
+                                        signupphonenumber: values.signupphonenumber
                                     });
                                 }}
                             >
                                 {({ handleSubmit, values, handleChange }) => (
                                     <form onSubmit={handleSubmit} noValidate className={classnames("d-flex","flex-col",classes.siginForm)}>
-                                        {/* <TextField 
+                                        <TextField 
                                             id="signupphonenumber" 
                                             label="Phone number" 
                                             type="number" 
                                             variant="standard" 
-                                        /><br/> */}
+                                            value={values.signupphonenumber}
+                                            onChange={handleChange}
+                                        /><br/>
                                         <TextField 
                                             id="signupName" 
                                             label="Name" 

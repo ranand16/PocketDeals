@@ -1,0 +1,1 @@
+export const CHECKOUTSTATES = ["LOGIN", "ADDRESS", "PAYMENT"];

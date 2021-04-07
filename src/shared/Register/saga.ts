@@ -1,18 +1,21 @@
-import { all, call, put, takeLatest } from 'redux-saga/effects'
+import { all, call, fork, put, takeLatest } from 'redux-saga/effects'
 import { Actions } from '../../Interfaces/actions'
 import rsf from '../../rsf'
 import { REQUEST } from '../../shared/Utils/actions'
 import { 
+	profileDownloadRequest,
 	setAuthStateSuccess,
 	signinFailure,
 	signinSuccess, 
 	signupFailure,
-	signupSuccess
+	signupSuccess,
+	updateProfileFailure
 } from './actions'
 import { 
     AUTHSTATE, 
 	SIGNIN, 
 	SIGNUP,
+	UPDATEPROFILE,
 } from './constants'
 
 function* setAuthState(action: Actions) {
@@ -36,12 +39,34 @@ function* signinSaga(action: Actions) {
 
 function* signupSaga(action: Actions) {
 	try {
-		const { signupEmail, signupPassword } = action.payload
-		console.log(action)
-		const response = yield call([rsf.auth, rsf.auth.createUserWithEmailAndPassword], signupEmail, signupPassword)
-		console.log(response)
-		if (response.user) {
-			yield put(signupSuccess(response.user));
+		const { signupEmail, signupPassword, signupName="", signupphonenumber="" } = action.payload
+		const signupResponse = yield call([rsf.auth, rsf.auth.createUserWithEmailAndPassword], signupEmail, signupPassword);
+		console.log(signupResponse)
+		const createProfileRespose = yield call(rsf.firestore.setDocument, `users/${signupResponse.user.uid}`, {
+			addresses: [{
+				point: { logintude: "", latitude: "" },
+				address: "",
+				addressType: "Other"
+			},{ 
+				point: { logintude: "", latitude: "" },
+				address: "",
+				addressType: "Office"
+			},{ 
+				point: { logintude: "", latitude: "" },
+				address: "",
+				addressType: "Home"
+			}],
+			firstName: signupName,
+			mobile: signupphonenumber,
+			lastName: "",
+			bio: ""
+		},{
+			merge: true
+		});
+		console.log("createProfileRespose:: ",createProfileRespose)
+		yield put(signupSuccess(signupResponse.user));
+		if (signupResponse.user) {
+			yield put(signupSuccess(signupResponse.user));
 		} else {
 			yield put(signupFailure({ message: "There was some error while creating your account!" }));
 		}
@@ -51,10 +76,30 @@ function* signupSaga(action: Actions) {
 	}
 }
 
+function* updateProfile(action: Actions) {
+	const { userId, updateFields } = action.payload
+	try {
+		yield call(rsf.firestore.updateDocument, `users/${userId}`, {
+			...updateFields
+		  });
+	} catch (e) {
+		yield put(updateProfileFailure(e));
+	}
+}
+
+function* syncProfileSaga() {
+	yield fork(rsf.firestore.syncCollection, 'users', {
+	  successActionCreator: profileDownloadRequest,
+	  transform: (profile)=>  profile,
+	})
+}
+
 export default function* registerSagaManager() {
 	yield all([
+		yield fork(syncProfileSaga),
 		takeLatest(REQUEST(AUTHSTATE), setAuthState),
 		takeLatest(REQUEST(SIGNIN), signinSaga),
-		takeLatest(REQUEST(SIGNUP), signupSaga)
+		takeLatest(REQUEST(SIGNUP), signupSaga),
+		takeLatest(REQUEST(UPDATEPROFILE), updateProfile)
 	])
 }

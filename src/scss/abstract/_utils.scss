@@ -24,14 +24,9 @@
   }
 }
 
-// erase and replace by 'between-($breakpoint)' and 'center-($breakpoint)'
-.space-between {
-  justify-content: space-between;
-}
 
-.justify-center {
-  justify-content: center;
-}
+
+
 
 /*==== Postitioning ====*/
 .center {
@@ -49,6 +44,29 @@
 
 .text-justify {
   text-align: justify;
+}
+.space-between {
+  justify-content: space-between;
+}
+
+.justify-left{
+  justify-content: left;
+}
+
+.justify-start{
+  justify-content: start;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center{
+  align-items: center;
+}
+
+.align-self-center{
+  align-self: center;
 }
 
 /*==== Toggling content ====*/
@@ -163,9 +181,6 @@
   flex-direction: column;
 }
 
-.align-center{
-  align-items: center;
-}
 
 .rupee::before{
   content: "\20B9";
