@@ -19,6 +19,7 @@ const CheckoutComp: React.FC<Props> = ({
 }: Props) => {
     const [step, setStep] = useState<string | undefined>(undefined);
     const history = useHistory();
+
     useEffect(()=> {
         if(!(userDetails && cart.length>0)) setStep(CHECKOUTSTATES[0])
     }, [])
@@ -37,11 +38,8 @@ const CheckoutComp: React.FC<Props> = ({
 
     return <div className={classnames("d-flex",styles.checkoutCompContainer)}>
         <div className={classnames("d-flex","flex-col","jusitfy-left",styles.checkoutSteps)}>
-            <div className={classnames(styles.checkoutStep)}>
-
-            </div>
             {
-                step === CHECKOUTSTATES[0] && 
+                step === CHECKOUTSTATES[0] ?
                 <div className={classnames("d-flex","flex-col","jusitfy-left", styles.checkoutStep)}>
                     { 
                         !userDetails && 
@@ -64,13 +62,20 @@ const CheckoutComp: React.FC<Props> = ({
                             onClick={seeProducts}
                         />
                     }
-                </div>
+                </div> :
+                <></>
             }
             <br/>
-            <form className={classnames(styles.checkoutStep)}>
-                <TextInput name={"Door / Flat No."} id={"doorflat"} placeholder={"Enter Door / Flat No. here..."} />
-                <TextInput name={"Landmark"} id={"landmark"} placeholder={"Enter landmark here..."} />
-            </form>
+            {
+                step === CHECKOUTSTATES[1]? 
+                <div className={classnames("d-flex","flex-col","jusitfy-left", styles.checkoutStep, styles.addressList)}>
+                    {
+
+                    }
+                </div>
+                :
+                "SELECT ADDRESS"
+            }
         </div>
         <CartComp 
             cart={cart}
