@@ -10,10 +10,10 @@ interface Props extends DispatchProps, StateProps {}
 
 const CartComp: React.FunctionComponent<Props> = ({
     cart,
+    onCheckout,
+    onPayment,
     addProductToCartRequestAction,
     removeProductToCartRequestAction,
-    onCheckout,
-    onPayment
 }: Props) => {
     /**
      * Add this product to cart

@@ -6,14 +6,14 @@ import {
     removeProductToCartRequestAction
 } from "../Products/actions"
 
-
 const mapStateToProps = (state: RootState) => ({
-    ...state.products
+    ...state.products,
+    ...state.registerState
 });
 
 const mapDispatchToProps = {
     addProductToCartRequestAction,
-    removeProductToCartRequestAction
+    removeProductToCartRequestAction,
 };
 
 export type StateProps = ReturnType<typeof mapStateToProps>;

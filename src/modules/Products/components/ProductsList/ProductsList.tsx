@@ -3,10 +3,8 @@ import { DispatchProps, StateProps } from "../../index"
 import classnames from 'classnames';
 import styles from "./ProductsList.module.scss"
 import vegicon from "../../../../images/veg.png"
-import cartempty from "../../../../images/emptycart.png"
-import { Button, responsiveFontSizes } from '@material-ui/core';
-import { Button as CustomButton } from "../../../../shared/FormElements/Button/Button"
-import { get } from "lodash"
+// import cartempty from "../../../../images/emptycart.png"
+import { Button } from '@material-ui/core';
 import { useHistory } from 'react-router';
 import axios, { AxiosRequestConfig } from 'axios';
 import { stringifyValue } from '../../../../shared/Utils/Stringify';
@@ -78,7 +76,7 @@ const ProductsList: React.FC<Props> = ({
                 amount,
                 phone_number,
                 email,
-                orderId
+                orderId                
             }   
             const url = "http://localhost:8081/payment"
             const req: AxiosRequestConfig = {
@@ -205,6 +203,7 @@ const ProductsList: React.FC<Props> = ({
                 cart={cart}
                 addProductToCartRequestAction={addProductToCartRequestAction}
                 removeProductToCartRequestAction={removeProductToCartRequestAction}
+                // onCheckout={payment}
                 onCheckout={onCheckout}
                 onPayment={null}
             />

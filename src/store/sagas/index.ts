@@ -9,12 +9,12 @@ import { all } from 'redux-saga/effects';
 import todoSagaManager from '../../modules/BackendIntegratioCheck/saga'
 import productSagaManager from '../../modules/Products/saga'
 import registerSagaManager from '../../shared/Register/saga';
+import ordersSagaManager from '../../modules/Orders/saga'
 
 export default function* rootSaga() {
   // console.log(todoSagaManager)
   // console.log(login)
   yield all([
-    // fork(employeesSaga),
     // fork(analytics),
     // fork(functions),
     // fork(login),
@@ -23,7 +23,8 @@ export default function* rootSaga() {
     // fork(storage),
     productSagaManager(),
     todoSagaManager(),
-    registerSagaManager()
+    registerSagaManager(),
+    ordersSagaManager()
     // fork(todoSagaManager),
   ]);
 }

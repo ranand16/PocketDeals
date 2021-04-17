@@ -55,6 +55,30 @@ export const ROUTES = [
           ...LoadableConfig,
         }),
       }
+    },
+    {
+      key: "Order",
+      routeProps: {
+        path: "/orders/:orderid",
+        component: Lodable({
+          loader: () =>
+            import("../modules/Orders"),
+          loading: RouteLoader,
+          ...LoadableConfig,
+        }),
+      }
+    },
+    {
+      key: "Orders",
+      routeProps: {
+        path: "/orders/",
+        component: Lodable({
+          loader: () =>
+            import("../modules/Orders"),
+          loading: RouteLoader,
+          ...LoadableConfig,
+        }),
+      }
     }
 ]
 

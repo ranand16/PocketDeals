@@ -4,7 +4,7 @@ import styles from "./WithHeader.module.scss";
 import { DispatchProps, StateProps } from "./index";
 import Header from "../Header";
 import Register from "../Register";
-
+import Address from "../Address";
 interface Props extends DispatchProps, StateProps {
   children: React.ReactNode;
 }
@@ -18,6 +18,8 @@ const WithHeader: React.FunctionComponent<Props> = ({
     <section
       className={classnames(styles.withHeader)}
     >
+      <Address 
+      />
       <Header
         authUIState ={authUIState}
         setAuthStateRequest={setAuthStateRequest}
